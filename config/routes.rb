@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users
+  post 'auth_user' => 'authentication#authenticate_user'
+  root to: "api/v1/posts#index"
+
+  namespace :api do
+    namespace :v1 do
+      resources :posts
+    end
+  end
 end
