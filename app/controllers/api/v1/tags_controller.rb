@@ -34,7 +34,7 @@ module Api
       end
 
       def tag_params
-        params.require(:post).permit(:title)
+        params.require(:tag).permit(:title)
       end
 
     end
