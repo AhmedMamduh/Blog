@@ -2,44 +2,44 @@ module Api
   module V1
     class CommentsController < ApplicationController
       before_action :authenticate_request!
-      before_action :set_comment, only: [:show, :update, :destroy]
-
-      def index
-        @comments = Comment.all
-      end
-
-      def show
-      end
+      before_action :set_post, only: [:create]
+      before_action :set_comment, only: [:update, :destroy]
 
       def create
-        @comment = Comment.new(comment_params)
-
-        if @comment.save
-          render :show, status: :created, location: @comment
+        return if @post.nil?
+        comment = @post.comments.create(comment_params, user_id: current_user.id)
+        if comment.save
+          render 'api/v1/posts/show', status: :created
         else
-          render json: @comment.errors, status: :unprocessable_entity
+          render json: comment.errors, status: :unprocessable_entity
         end
       end
 
       def update
+        return unless @comment.user_is_author?(current_user.id)
         if @comment.update(comment_params)
-          render :show, status: :ok, location: @comment
+          render 'api/v1/posts/show', status: :ok
         else
           render json: @comment.errors, status: :unprocessable_entity
         end
       end
 
       def destroy
+        return unless @comment.user_is_author?(current_user.id)
         @comment.destroy
       end
 
       private
+      def set_post
+        @post = Post.find(params[:post_id])
+      end
+
       def set_comment
         @comment = Comment.find(params[:id])
       end
 
       def comment_params
-        params.require(:comment).permit(:body, :user_id, :post_id)
+        params.require(:comment).permit(:body)
       end
 
     end

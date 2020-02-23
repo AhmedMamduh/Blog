@@ -1,2 +1,14 @@
-json.extract! post, :id, :title, :body, :user_id, :created_at, :updated_at
-json.url post_url(post, format: :json)
+json.extract! post, :id, :title, :body, :user_id, :created_at
+json.author do
+  json.extract! post.author, :id, :email
+end
+json.comments do
+  json.array! post.comments do |comment|
+    json.extract! comment, :id, :body, :user_id
+  end
+end
+json.tags do
+  json.array! post.tags do |tag|
+    json.extract! tag, :id, :title
+  end
+end
