@@ -12,12 +12,11 @@ module Api
       end
 
       def create
-        @post = current_user.posts.create(post_params)
-        if @post.save
-          @post.tags.create(post_params[:tag_attributes])
+        post = current_user.posts.create(post_params)
+        if post.save
           render :show, status: :created
         else
-          render json: @post.errors, status: :unprocessable_entity
+          render json: post.errors, status: :unprocessable_entity
         end
       end
 
@@ -38,9 +37,7 @@ module Api
       private
 
       def post_params
-        params.require(:post).permit(
-          :title, :body, tag_attributes: %i[title],
-        )
+        params.require(:post).permit(:title, :body, tags_attributes: %i[title])
       end
 
       def set_post

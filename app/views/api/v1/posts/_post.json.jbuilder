@@ -1,4 +1,4 @@
-json.extract! post, :id, :title, :body, :user_id, :created_at
+json.extract! post, :id, :title, :body, :created_at
 json.author do
   json.extract! post.author, :id, :email
 end

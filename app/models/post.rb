@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
   #------------------------------ Associations --------------------------------
-  belongs_to :author, class_name: 'User'
+  belongs_to :author, class_name: 'User', foreign_key: "user_id"
   has_many :comments, dependent: :destroy
   has_many :tags, dependent: :destroy
+  accepts_nested_attributes_for :tags
   #-------------------------------- Callbacks ---------------------------------
   after_commit :delete_post, on: :create
   #--------------------------------- Methods ---------------------------------
