@@ -12,7 +12,7 @@ gem 'puma', '~> 4.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
@@ -20,7 +20,11 @@ gem 'jwt'
 gem 'jbuilder'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-gem 'sidekiq', '~> 5.0', '>= 5.0.5'
+# Background job gem
+gem 'sidekiq', '~> 5.1.1'
+gem 'delayed_job_active_record', '~> 4.1.2'
+gem 'sidekiq-scheduler', '~> 3.0'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -33,9 +37,6 @@ end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
