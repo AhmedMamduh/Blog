@@ -1,0 +1,23 @@
+language: ruby
+
+rvm:
+ - 2.2.10
+ - 2.3.8
+ - 2.4.5
+ - 2.5.2
+ - ruby-head
+ - jruby-head
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: jruby-head
+
+gemfile:
+  - Gemfile
+
+sudo: false
+
+script:
+  - bundle exec rspec
+  - bundle exec rubocop

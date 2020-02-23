@@ -20,10 +20,17 @@ gem 'jwt'
 gem 'jbuilder'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+
 # Background job gem
 gem 'sidekiq', '~> 5.1.1'
 gem 'delayed_job_active_record', '~> 4.1.2'
 gem 'sidekiq-scheduler', '~> 3.0'
+
+# Personal images gems
+gem 'carrierwave'
+gem 'carrierwave-base64'
+gem 'jsonapi-resources'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
