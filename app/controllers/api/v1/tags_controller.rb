@@ -9,7 +9,7 @@ module Api
         return if @post.nil?
         tag = @post.tags.create(tag_params)
         if tag.save
-          render 'api/v1/posts/show', status: :created
+          render 'api/v1/posts/_post', locals: { post: @post }, status: :created
         else
           render json: tag.errors, status: :unprocessable_entity
         end
@@ -18,7 +18,7 @@ module Api
       def update
         return unless @post.user_is_author?(current_user.id)
         if @tag.update(tag_params)
-          render 'api/v1/posts/show', status: :ok
+          render 'api/v1/posts/_post', locals: { post: @post }, status: :ok
         else
           render json: @tag.errors, status: :unprocessable_entity
         end

@@ -7,9 +7,9 @@ module Api
 
       def create
         return if @post.nil?
-        comment = @post.comments.create(comment_params, user_id: current_user.id)
+        comment = @post.comments.create(body: comment_params[:body], user_id: current_user.id)
         if comment.save
-          render 'api/v1/posts/show', status: :created
+          render 'api/v1/posts/_post', locals: { post: @post }, status: :created
         else
           render json: comment.errors, status: :unprocessable_entity
         end
@@ -18,7 +18,7 @@ module Api
       def update
         return unless @comment.user_is_author?(current_user.id)
         if @comment.update(comment_params)
-          render 'api/v1/posts/show', status: :ok
+          render 'api/v1/posts/_post', locals: { post: @comment.post }, status: :ok
         else
           render json: @comment.errors, status: :unprocessable_entity
         end
@@ -31,7 +31,7 @@ module Api
 
       private
       def set_post
-        @post = Post.find(params[:post_id])
+        @post = Post.find(params[:post_id].to_i)
       end
 
       def set_comment
