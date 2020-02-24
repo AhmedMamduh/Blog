@@ -12,11 +12,11 @@ module Api
       end
 
       def create
-        post = current_user.posts.create(post_params)
-        if post.save
+        @post = current_user.posts.create(post_params)
+        if @post.save
           render :show, status: :created
         else
-          render json: post.errors, status: :unprocessable_entity
+          render json: @post.errors, status: :unprocessable_entity
         end
       end
 
@@ -42,10 +42,6 @@ module Api
 
       def set_post
         @post = Post.find(params[:id])
-      end
-
-      def post_paramss
-        params.require(:post).permit(:title, :body, :user_id)
       end
 
     end

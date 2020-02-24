@@ -1,15 +1,12 @@
-# README
-
-Ruby on Rails Blog Application RESTful API do the following:
+# Ruby on Rails Blog Application, RESTful API do the following:
 
 Authenticate Users (Login, Signup)
 - Each user has the following fields (name, email, password, image)
-- User will log in using his email and password
+- User log in using his email and password
 - All other api endpoints are not accessible without authentication
-- Use JWT for API authentication
+- JWT for API authentication
 CRUD Posts:
-- Each post has the following fields (title, body, author, tags, comments) ​Please
-note that the author is a separate entity which is the user model.
+- Each post has the following fields (title, body, author, tags, comments).
 - Users/authors can only edit/delete their own posts
 - Users/authors can add comments on any post
 - Users/authors can only edit/delete their own comments
@@ -20,7 +17,7 @@ note that the author is a separate entity which is the user model.
 Used Ruby On Rails, mysql database, Sidekiq and redis (to schedule post deletion)
 
 - First Create User
-User.create(email:'test@test.com', password:123456, password_confirmation: 123456)
+User.create(name: "test", email: "test@test.com", password: 123456, password_confirmation: 123456)
 
 - Auth Token
 POST localhost:3000/auth_user

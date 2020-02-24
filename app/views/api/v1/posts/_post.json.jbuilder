@@ -1,6 +1,6 @@
 json.extract! post, :id, :title, :body, :created_at
 json.author do
-  json.extract! post.author, :id, :email
+  json.extract! post.author, :id, :email, :name, :image
 end
 json.comments do
   json.array! post.comments do |comment|
