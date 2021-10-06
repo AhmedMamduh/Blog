@@ -22,7 +22,7 @@ gem 'jbuilder'
 # gem 'image_processing', '~> 1.2'
 
 # Background job gem
-gem 'sidekiq', '~> 5.1.1'
+gem 'sidekiq', '~> 5.2.0'
 gem 'delayed_job_active_record', '~> 4.1.2'
 gem 'sidekiq-scheduler', '~> 3.0'
 
